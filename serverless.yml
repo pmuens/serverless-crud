@@ -1,0 +1,57 @@
+service: serverless-crud
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:us-east-1:*:*"
+
+functions:
+  create:
+    handler: handler.create
+    events:
+      - http: POST todos
+  readAll:
+    handler: handler.readAll
+    events:
+      - http: GET todos
+  readOne:
+    handler: handler.readOne
+    events:
+      - http: GET todos/{id}
+  update:
+    handler: handler.update
+    events:
+      - http: PUT todos/{id}
+  delete:
+    handler: handler.delete
+    events:
+      - http: DELETE todos/{id}
+
+resources:
+  Resources:
+    TodosDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: 'todos'
