@@ -13,5 +13,6 @@ Make sure that you use Serverless v1.
 
 ## AWS services used
 
+- Lambda
 - API Gateway
 - DynamoDB
