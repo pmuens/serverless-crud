@@ -5,7 +5,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 const uuid = require('uuid');
 
 module.exports = (event, callback) => {
-  const data = event.body;
+  const data = JSON.parse(event.body);
 
   data.id = uuid.v1();
   data.updatedAt = new Date().getTime();
