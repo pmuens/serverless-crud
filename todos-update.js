@@ -4,7 +4,7 @@ const AWS = require('aws-sdk');
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports = (event, callback) => {
-  const data = event.body;
+  const data = JSON.parse(event.body);
 
   data.id = event.path.id;
   data.updatedAt = new Date().getTime();
