@@ -1,6 +1,6 @@
 # Serverless CRUD
 
-Serverless service which provides you a basic CRUD scaffold.
+Serverless service which provides a basic CRUD scaffold.
 
 ## Installation
 
