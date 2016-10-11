@@ -3,6 +3,8 @@ service: serverless-crud
 provider:
   name: aws
   runtime: nodejs4.3
+  region: us-east-1
+  stage: dev
   iamRoleStatements:
     - Effect: Allow
       Action:
