@@ -14,8 +14,7 @@ module.exports = (event, callback) => {
   return dynamoDb.get(params, (error, data) => {
     if (error) {
       callback(error);
-    } else {
-      callback(error, data.Item);
     }
+    callback(error, data.Item);
   });
 };
