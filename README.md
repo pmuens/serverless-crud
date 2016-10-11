@@ -13,7 +13,7 @@ Make sure that you use Serverless v1.
 
 ## How to use
 
-Simply perform a requests against the exposed endpoint:
+Simply perform requests against the exposed endpoints:
 
 ### Create
 
