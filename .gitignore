@@ -1,3 +1,4 @@
+.serverless
 *.log
 npm-debug.log
 pids
