@@ -21,23 +21,38 @@ functions:
   create:
     handler: handler.create
     events:
-      - http: POST todos
+      - http:
+          path: todos
+          method: post
+          cors: true
   readAll:
     handler: handler.readAll
     events:
-      - http: GET todos
+      - http:
+          path: todos
+          method: get
+          cors: true
   readOne:
     handler: handler.readOne
     events:
-      - http: GET todos/{id}
+      - http:
+          path: todos/{id}
+          method: get
+          cors: true
   update:
     handler: handler.update
     events:
-      - http: PUT todos/{id}
+      - http:
+          path: todos/{id}
+          method: put
+          cors: true
   delete:
     handler: handler.delete
     events:
-      - http: DELETE todos/{id}
+      - http:
+          path: todos/{id}
+          method: delete
+          cors: true
 
 resources:
   Resources:
