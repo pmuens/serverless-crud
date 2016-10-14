@@ -8,7 +8,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.6.7",
     "uuid": "^2.0.3"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.6.3"
   }
 }
