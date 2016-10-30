@@ -7,7 +7,7 @@ module.exports = (event, callback) => {
   const data = JSON.parse(event.body);
 
   data.id = event.pathParameters.id;
-  data.updatedAt = new Date().getTime();
+  data.updatedAt = Date.now();
 
   const params = {
     TableName : 'todos',
