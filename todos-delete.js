@@ -1,20 +1,19 @@
 'use strict';
 
-const AWS = require('aws-sdk');
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const faunadb = require('faunadb');
+const q = faunadb.query;
+const client = new faunadb.Client({
+  secret: process.env.FAUNADB_SECRET
+});
 
 module.exports = (event, callback) => {
-  const params = {
-    TableName : 'todos',
-    Key: {
-      id: event.pathParameters.id
-    }
-  };
-
-  return dynamoDb.delete(params, (error, data) => {
-    if (error) {
-      callback(error);
-    }
-    callback(error, params.Key);
-  });
+  console.log("delete todo");
+  return client.query(q.Delete(q.Ref("classes/todos/"+event.pathParameters.id)))
+  .then((response) => {
+    console.log("success", response);
+    callback(false, response);
+  }).catch((error) => {
+    console.log("error", error);
+    callback(error)
+  })
 };

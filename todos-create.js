@@ -1,24 +1,20 @@
 'use strict';
 
-const AWS = require('aws-sdk');
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-const uuid = require('uuid');
+const faunadb = require('faunadb');
+const q = faunadb.query;
+const client = new faunadb.Client({
+  secret: process.env.FAUNADB_SECRET
+});
 
 module.exports = (event, callback) => {
   const data = JSON.parse(event.body);
-
-  data.id = uuid.v1();
-  data.updatedAt = new Date().getTime();
-
-  const params = {
-    TableName: 'todos',
-    Item: data
-  };
-
-  return dynamoDb.put(params, (error, data) => {
-    if (error) {
-      callback(error);
-    }
-    callback(error, params.Item);
-  });
+  console.log("create todo", data);
+  return client.query(q.Create(q.Ref("classes/todos"), {data}))
+  .then((response) => {
+    console.log("success", response);
+    callback(false, response);
+  }).catch((error) => {
+    console.log("error", error);
+    callback(error)
+  })
 };
