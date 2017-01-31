@@ -10,7 +10,7 @@ module.exports = (event, callback) => {
 
   return dynamoDb.scan(params, (error, data) => {
     if (error) {
-      callback(error);
+      return callback(error);
     }
     callback(error, data.Items);
   });
