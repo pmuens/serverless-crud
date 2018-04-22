@@ -6,72 +6,57 @@ const todosReadOne = require('./todos-read-one.js');
 const todosUpdate = require('./todos-update.js');
 const todosDelete = require('./todos-delete.js');
 
-module.exports.create = (event, context, callback) => {
-  todosCreate(event, (error, result) => {
-    const response = {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin" : "*"
-      },
-      body: JSON.stringify(result),
-    };
-
-    context.succeed(response);
-  });
+module.exports.create = async (event) => {
+  const result = await todosCreate.handler(event);
+  return {
+    statusCode: 200,
+    headers: {
+      "Access-Control-Allow-Origin" : "*"
+    },
+    body: JSON.stringify(result),
+  };
 };
 
-module.exports.readAll = (event, context, callback) => {
-  todosReadAll(event, (error, result) => {
-    const response = {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin" : "*"
-      },
-      body: JSON.stringify(result),
-    };
+module.exports.readAll = async (event) => {
+  const result = await todosReadAll.handler(event);
+  return {
+    statusCode: 200,
+    headers: {
+      "Access-Control-Allow-Origin" : "*"
+    },
+    body: JSON.stringify(result),
+  };
+}
 
-    context.succeed(response);
-  });
+module.exports.readOne = async (event) => {
+  const result = await todosReadOne.handler(event);
+  return {
+    statusCode: 200,
+    headers: {
+      "Access-Control-Allow-Origin" : "*"
+    },
+    body: JSON.stringify(result),
+  };
 };
 
-module.exports.readOne = (event, context, callback) => {
-  todosReadOne(event, (error, result) => {
-    const response = {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin" : "*"
-      },
-      body: JSON.stringify(result),
-    };
-
-    context.succeed(response);
-  });
+module.exports.update = async (event) => {
+  const result = await todosUpdate.handler(event);
+  return {
+    statusCode: 200,
+    headers: {
+      "Access-Control-Allow-Origin" : "*"
+    },
+    body: JSON.stringify(result),
+  };
 };
 
-module.exports.update = (event, context, callback) => {
-  todosUpdate(event, (error, result) => {
-    const response = {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin" : "*"
-      },
-      body: JSON.stringify(result),
-    };
-
-    context.succeed(response);
-  });
-};
-
-module.exports.delete = (event, context, callback) => {
-  todosDelete(event, (error, result) => {
-    const response = {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin" : "*"
-      },
-      body: JSON.stringify(result),
-    };
-
-    context.succeed(response);
-  });
+module.exports.delete = async (event) => {
+  const result = await todosDelete.handler(event);
+  return {
+    statusCode: 200,
+    headers: {
+      "Access-Control-Allow-Origin" : "*"
+    },
+    body: JSON.stringify(result),
+  };
 };

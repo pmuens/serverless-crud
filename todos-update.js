@@ -1,11 +1,9 @@
-'use strict';
 
 const AWS = require('aws-sdk');
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-module.exports = (event, callback) => {
+exports.handler = async (event) => {
   const data = JSON.parse(event.body);
-
   data.id = event.pathParameters.id;
   data.updatedAt = new Date().getTime();
 
@@ -14,10 +12,6 @@ module.exports = (event, callback) => {
     Item: data
   };
 
-  return dynamoDb.put(params, (error, data) => {
-    if (error) {
-      callback(error);
-    }
-    callback(error, params.Item);
-  });
+  await dynamoDb.put(params).promise();
+  return data;
 };

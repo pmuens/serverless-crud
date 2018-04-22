@@ -1,9 +1,7 @@
-'use strict';
-
 const AWS = require('aws-sdk');
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-module.exports = (event, callback) => {
+exports.handler = async (event) => {
   const params = {
     TableName: 'todos',
     Key: {
@@ -11,10 +9,6 @@ module.exports = (event, callback) => {
     }
   };
 
-  return dynamoDb.get(params, (error, data) => {
-    if (error) {
-      callback(error);
-    }
-    callback(error, data.Item);
-  });
+  result = await dynamoDb.get(params).promise();
+  return result.Item;
 };

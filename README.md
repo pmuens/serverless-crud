@@ -11,6 +11,14 @@ Make sure that you use Serverless v1.
 3. Run `npm install`
 4. Deploy with `serverless deploy`
 
+-or-
+
+Run locally with `sam local start-api`
+
+You may need to regenerate the `sam local` template:
+
+`serverless sam export -o template.yml`
+
 ## How to use
 
 Simply perform requests against the exposed endpoints:
